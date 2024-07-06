@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geri Sayım Sayacı</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  #countdown {
+    font-size: 2em;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+<script>
+  // Hedef zamanı belirleyin (Yıl, Ay, Gün, Saat, Dakika, Saniye)
+  var countdownDate = new Date("July 10, 2024 15:00:00").getTime();
+
+  // Geri sayımı güncellemek için her saniye çalışacak bir fonksiyon oluşturun
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countdownDate - now;
+
+    // Zaman hesaplamaları
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Geri sayımı göster
+    document.getElementById("countdown").innerHTML = days + " Gün " + hours + " Saat "
+    + minutes + " Dakika " + seconds + " Saniye ";
+
+    // Geri sayım bittiyse
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "SÜRE DOLDU";
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
